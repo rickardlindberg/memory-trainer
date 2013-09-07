@@ -10,6 +10,7 @@ describe("slideshow page", function() {
         spyOn(testPage, "start");
         slideshowPage = new SlideshowPage(slideshowView, testPage);
         jasmine.Clock.useMock();
+        jasmine.Clock.reset();
     });
 
     it("shows first word when started", function() {
