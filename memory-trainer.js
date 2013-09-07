@@ -57,6 +57,7 @@ function TestPage(testPageView, resultPage) {
 function ResultPage() {
 
     this.start = function(correctGuesses) {
+        alert(correctGuesses);
     }
 
 };
@@ -77,9 +78,11 @@ function SlideshowView() {
 function TestPageView() {
 
     this.inputWord = function() {
+        this.testPage.test(prompt("Next word:", ""));
     };
 
-    this.wrongGuess = function() {
+    this.wrongGuess = function(wrongGuess, rightAnswer) {
+        alert("You guessed '" + wrongGuess + "' but was '" + rightAnswer + "'.");
     };
 
 }

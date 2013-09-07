@@ -13,7 +13,15 @@
     </style>
     <script type="text/javascript">
     $(document).ready(function() {
-        var slideshowPage = new SlideshowPage(new SlideshowView(), new TestPage());
+        var slideshowView = new SlideshowView();
+        var testPageView = new TestPageView();
+
+        var resultPage = new ResultPage();
+        var testPage = new TestPage(testPageView, resultPage);
+        var slideshowPage = new SlideshowPage(slideshowView, testPage);
+
+        testPageView.testPage = testPage;
+
         slideshowPage.start({
             words: ["apa", "korv", "senap"],
             secondsPerWord: 1
