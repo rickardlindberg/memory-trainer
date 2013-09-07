@@ -1,16 +1,35 @@
-function SlideshowPage(slideshowView) {
+function SlideshowPage(slideshowView, testPage) {
 
-    this.start = function(settings) {
-        slideshowView.displayWord(settings.words[0]);
-        setTimeout(function() {
-            slideshowView.fadeOutWord(500 * settings.secondsPerWord);
-        }, 500 * settings.secondsPerWord);
-        setTimeout(function() {
-            slideshowView.displayWord(settings.words[1]);
-        }, 1000 * settings.secondsPerWord);
+    var self = this;
+
+    self.start = function(settings) {
+        self.settings = settings;
+        self.displayNextWord(settings.words);
+    };
+
+    self.displayNextWord = function(words) {
+        if (words.length == 0) {
+            testPage.start(self.settings.words);
+        } else {
+            slideshowView.displayWord(words[0]);
+            setTimeout(function() {
+                slideshowView.fadeOutWord(500 * self.settings.secondsPerWord);
+            }, 500 * self.settings.secondsPerWord);
+            setTimeout(function() {
+                self.displayNextWord(words.slice(1), self.settings.secondsPerWord);
+            }, 1000 * self.settings.secondsPerWord);
+        }
     };
 
 }
+
+function TestPage() {
+
+    this.start = function(words) {
+        alert("woho");
+    };
+
+};
 
 function SlideshowView() {
 
@@ -26,9 +45,9 @@ function SlideshowView() {
 }
 
 $(document).ready(function() {
-    var slideshowPage = new SlideshowPage(new SlideshowView());
+    var slideshowPage = new SlideshowPage(new SlideshowView(), new TestPage());
     slideshowPage.start({
-        words: ["apa", "korv"],
-        secondsPerWord: 6
+        words: ["apa", "korv", "senap"],
+        secondsPerWord: 1
     });
 });

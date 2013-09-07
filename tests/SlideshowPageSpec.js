@@ -1,12 +1,15 @@
 describe("slideshow page", function() {
 
-    var slideshowView, slideshowPage;
+    var slideshowView, slideshowPage, testPage;
 
     beforeEach(function() {
         slideshowView = new SlideshowView();
         spyOn(slideshowView, "displayWord");
         spyOn(slideshowView, "fadeOutWord");
-        slideshowPage = new SlideshowPage(slideshowView);
+        testPage = new TestPage();
+        spyOn(testPage, "start");
+        slideshowPage = new SlideshowPage(slideshowView, testPage);
+        jasmine.Clock.useMock();
     });
 
     it("shows first word when started", function() {
@@ -18,10 +21,6 @@ describe("slideshow page", function() {
     });
 
     describe("switching to the next word", function() {
-
-        beforeEach(function() {
-            jasmine.Clock.useMock();
-        });
 
         it("switches after the configured number of seconds", function() {
             slideshowPage.start({
@@ -45,6 +44,20 @@ describe("slideshow page", function() {
             expect(slideshowView.fadeOutWord).toHaveBeenCalledWith(3000);
         });
 
+    });
+
+    it("leaves control to test page when last word shown", function() {
+        slideshowPage.start({
+            words: ["monkey", "fan", "flower"],
+            secondsPerWord: 6
+        });
+        jasmine.Clock.tick(2 * 6000);
+        expect(slideshowView.displayWord).toHaveBeenCalledWith("monkey");
+        expect(slideshowView.displayWord).toHaveBeenCalledWith("fan");
+        expect(slideshowView.displayWord).toHaveBeenCalledWith("flower");
+        expect(testPage.start).not.toHaveBeenCalled();
+        jasmine.Clock.tick(6000);
+        expect(testPage.start).toHaveBeenCalledWith(["monkey", "fan", "flower"]);
     });
 
 });
