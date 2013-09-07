@@ -9,7 +9,10 @@ describe("slideshow page", function() {
 
     it("shows first word when started", function() {
         spyOn(slideshowView, "displayWord");
-        slideshowPage.start(["monkey", "fan", "flower"]);
+        slideshowPage.start({
+            words: ["monkey", "fan", "flower"],
+            secondsPerWord: 6
+        });
         expect(slideshowView.displayWord).toHaveBeenCalledWith("monkey");
     });
 
@@ -21,9 +24,14 @@ describe("slideshow page", function() {
 
         it("switches after the configured number of seconds", function() {
             spyOn(slideshowView, "displayWord");
-            slideshowPage.start(["monkey", "fan"]);
+            slideshowPage.start({
+                words: ["monkey", "fan"],
+                secondsPerWord: 6
+            });
             expect(slideshowView.displayWord).not.toHaveBeenCalledWith("fan");
-            jasmine.Clock.tick(100);
+            jasmine.Clock.tick(5999);
+            expect(slideshowView.displayWord).not.toHaveBeenCalledWith("fan");
+            jasmine.Clock.tick(1);
             expect(slideshowView.displayWord).toHaveBeenCalledWith("fan");
         });
 

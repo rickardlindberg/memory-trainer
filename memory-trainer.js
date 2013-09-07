@@ -1,9 +1,9 @@
 function SlideshowPage(slideshowView) {
-    this.start = function(words) {
-        slideshowView.displayWord(words[0]);
+    this.start = function(settings) {
+        slideshowView.displayWord(settings.words[0]);
         setTimeout(function() {
-            slideshowView.displayWord(words[1]);
-        }, 100);
+            slideshowView.displayWord(settings.words[1]);
+        }, 1000 * settings.secondsPerWord);
     };
 }
 
@@ -15,5 +15,8 @@ function SlideshowView() {
 
 $(document).ready(function() {
     var slideshowPage = new SlideshowPage(new SlideshowView());
-    slideshowPage.start(["apa", "korv"]);
+    slideshowPage.start({
+        words: ["apa", "korv"],
+        secondsPerWord: 6
+    });
 });
