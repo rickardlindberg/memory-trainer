@@ -27,13 +27,9 @@ function SettingsPage(slideShowPage) {
         "tändsticka",
     ];
 
-    var getRandomWords = function(from, count) {
-        return _.shuffle(from).slice(0, count);
-    };
-
     this.start = function() {
         slideShowPage.start({
-            words: getRandomWords(dictionary.slice(0), 20),
+            words: _.sample(dictionary, 20),
             secondsPerWord: 6
         });
     };
