@@ -2,15 +2,24 @@
   "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-  <title>Memory Trainer</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <script type="text/javascript" src="jquery-2.0.3.min.js"></script>
-  <script type="text/javascript" src="memory-trainer.js"></script>
-  <style type="text/css">
-      #slideshow {
-          background-color: #f30530;
-      }
-  </style>
+    <title>Memory Trainer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="memory-trainer.js"></script>
+    <style type="text/css">
+    #slideshow {
+      background-color: #f30530;
+    }
+    </style>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var slideshowPage = new SlideshowPage(new SlideshowView(), new TestPage());
+        slideshowPage.start({
+            words: ["apa", "korv", "senap"],
+            secondsPerWord: 1
+        });
+    });
+    </script>
 </head>
 <body>
     <div id="slideshow">

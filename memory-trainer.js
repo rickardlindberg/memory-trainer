@@ -43,11 +43,3 @@ function SlideshowView() {
     };
 
 }
-
-$(document).ready(function() {
-    var slideshowPage = new SlideshowPage(new SlideshowView(), new TestPage());
-    slideshowPage.start({
-        words: ["apa", "korv", "senap"],
-        secondsPerWord: 1
-    });
-});
