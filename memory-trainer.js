@@ -23,10 +23,18 @@ function SlideshowPage(slideshowView, testPage) {
 
 }
 
-function TestPage() {
+function TestPage(testPageView) {
 
     this.start = function(words) {
-        alert("woho");
+        this.askForNext();
+    };
+
+    this.test = function(word) {
+        this.askForNext();
+    };
+
+    this.askForNext = function() {
+        testPageView.inputWord();
     };
 
 };
@@ -41,5 +49,12 @@ function SlideshowView() {
     this.fadeOutWord = function(inMs) {
         $("#slideshow .word").fadeOut(inMs);
     };
+
+}
+
+function TestPageView() {
+
+    this.inputWord = function() {
+    }
 
 }
