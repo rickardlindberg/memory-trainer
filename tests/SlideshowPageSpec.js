@@ -13,4 +13,18 @@ describe("slideshow page", function() {
         expect(slideshowView.displayWord).toHaveBeenCalledWith("monkey");
     });
 
+    describe("switching to the next word", function() {
+
+        it("switches after the configured number of seconds", function() {
+            jasmine.Clock.useMock();
+            spyOn(slideshowView, "displayWord");
+            slideshowPage.start(["monkey", "fan"]);
+            expect(slideshowView.displayWord).toHaveBeenCalledWith("monkey");
+            expect(slideshowView.displayWord).not.toHaveBeenCalledWith("fan");
+            jasmine.Clock.tick(100);
+            expect(slideshowView.displayWord).toHaveBeenCalledWith("fan");
+        });
+
+    });
+
 });

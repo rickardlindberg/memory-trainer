@@ -1,6 +1,9 @@
 function SlideshowPage(slideshowView) {
     this.start = function(words) {
         slideshowView.displayWord(words[0]);
+        setTimeout(function() {
+            slideshowView.displayWord(words[1]);
+        }, 100);
     };
 }
 
