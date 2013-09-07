@@ -15,11 +15,13 @@ describe("slideshow page", function() {
 
     describe("switching to the next word", function() {
 
-        it("switches after the configured number of seconds", function() {
+        beforeEach(function() {
             jasmine.Clock.useMock();
+        });
+
+        it("switches after the configured number of seconds", function() {
             spyOn(slideshowView, "displayWord");
             slideshowPage.start(["monkey", "fan"]);
-            expect(slideshowView.displayWord).toHaveBeenCalledWith("monkey");
             expect(slideshowView.displayWord).not.toHaveBeenCalledWith("fan");
             jasmine.Clock.tick(100);
             expect(slideshowView.displayWord).toHaveBeenCalledWith("fan");
