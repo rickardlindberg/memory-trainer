@@ -1,12 +1,15 @@
-describe("slideshow page", function () {
+describe("slideshow page", function() {
 
-    it("shows first word when started", function () {
-        var slideshowView = {
-            displayWord: function () {}
-        };
+    var slideshowView, slideshowPage;
+
+    beforeEach(function() {
+        slideshowView = new SlideshowView();
+        slideshowPage = new SlideshowPage(slideshowView);
+    });
+
+    it("shows first word when started", function() {
         spyOn(slideshowView, "displayWord");
-        var slideshowPage = new SlideshowPage(slideshowView, ["monkey", "fan", "flower"]);
-        slideshowPage.start();
+        slideshowPage.start(["monkey", "fan", "flower"]);
         expect(slideshowView.displayWord).toHaveBeenCalledWith("monkey");
     });
 

@@ -1,5 +1,5 @@
-function SlideshowPage(slideshowView, words) {
-    this.start = function () {
+function SlideshowPage(slideshowView) {
+    this.start = function(words) {
         slideshowView.displayWord(words[0]);
     };
 }
@@ -10,8 +10,7 @@ function SlideshowView() {
     };
 }
 
-$(document).ready(function () {
-    var slideshowView = new SlideshowView();
-    var slideshowPage = new SlideshowPage(slideshowView, ["apa", "korv"]);
-    slideshowPage.start();
+$(document).ready(function() {
+    var slideshowPage = new SlideshowPage(new SlideshowView());
+    slideshowPage.start(["apa", "korv"]);
 });
