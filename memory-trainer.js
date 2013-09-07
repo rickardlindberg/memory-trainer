@@ -1,3 +1,45 @@
+function SettingsPage(slideShowPage) {
+
+    var dictionary = [
+        "korv",
+        "blomma",
+        "kanin",
+        "ägg",
+        "nyckel",
+        "båt",
+        "sten",
+        "kotte",
+        "kylskåp",
+        "nalle",
+        "hjärta",
+        "fönster",
+        "kakelplatta",
+        "handfat",
+        "fotboll",
+        "golfklubba",
+        "vas",
+        "glas",
+        "glass",
+        "träd",
+        "löv",
+        "ljusstake",
+        "glödlampa",
+        "tändsticka",
+    ];
+
+    var getRandomWords = function(from, count) {
+        return _.shuffle(from).slice(0, count);
+    };
+
+    this.start = function() {
+        slideShowPage.start({
+            words: getRandomWords(dictionary.slice(0), 20),
+            secondsPerWord: 6
+        });
+    };
+
+};
+
 function SlideshowPage(slideshowView, testPage) {
 
     var self = this;

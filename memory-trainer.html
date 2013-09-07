@@ -5,6 +5,7 @@
     <title>Memory Trainer</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script type="text/javascript" src="jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="underscore-min.js"></script>
     <script type="text/javascript" src="memory-trainer.js"></script>
     <style type="text/css">
     #slideshow {
@@ -19,13 +20,11 @@
         var resultPage = new ResultPage();
         var testPage = new TestPage(testPageView, resultPage);
         var slideshowPage = new SlideshowPage(slideshowView, testPage);
+        var settingsPage = new SettingsPage(slideshowPage);
 
         testPageView.testPage = testPage;
 
-        slideshowPage.start({
-            words: ["apa", "korv", "senap"],
-            secondsPerWord: 1
-        });
+        settingsPage.start();
     });
     </script>
 </head>
