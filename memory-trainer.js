@@ -25,15 +25,21 @@ function SlideshowPage(slideshowView, testPage) {
 
 function TestPage(testPageView) {
 
-    this.start = function(words) {
-        this.askForNext();
+    var self = this;
+
+    self.start = function(words) {
+        self.words = words;
+        self.askForNext();
     };
 
-    this.test = function(word) {
-        this.askForNext();
+    self.test = function(word) {
+        if (self.words[0] != word) {
+            testPageView.wrongGuess(word, self.words[0]);
+        }
+        self.askForNext();
     };
 
-    this.askForNext = function() {
+    self.askForNext = function() {
         testPageView.inputWord();
     };
 
@@ -55,6 +61,9 @@ function SlideshowView() {
 function TestPageView() {
 
     this.inputWord = function() {
-    }
+    };
+
+    this.wrongGuess = function() {
+    };
 
 }
