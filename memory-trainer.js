@@ -23,25 +23,41 @@ function SlideshowPage(slideshowView, testPage) {
 
 }
 
-function TestPage(testPageView) {
+function TestPage(testPageView, resultPage) {
 
     var self = this;
 
     self.start = function(words) {
         self.words = words;
+        self.currentWord = -1;
+        self.correctGuesses = 0;
         self.askForNext();
     };
 
     self.test = function(word) {
-        if (self.words[0] != word) {
-            testPageView.wrongGuess(word, self.words[0]);
+        if (self.words[self.currentWord] == word) {
+            self.correctGuesses++;
+        } else {
+            testPageView.wrongGuess(word, self.words[self.currentWord]);
         }
         self.askForNext();
     };
 
     self.askForNext = function() {
-        testPageView.inputWord();
+        self.currentWord++;
+        if (self.currentWord == self.words.length) {
+            resultPage.start(self.correctGuesses);
+        } else {
+            testPageView.inputWord();
+        }
     };
+
+};
+
+function ResultPage() {
+
+    this.start = function(correctGuesses) {
+    }
 
 };
 
