@@ -2,6 +2,13 @@ describe("test page", function() {
 
     var view, testPage, resultPage;
 
+    var settingsWithWords = function(words) {
+        return {
+            words: words,
+            secondsPerWord: 6
+        };
+    };
+
     beforeEach(function() {
         view = new View();
         spyOn(view, "inputWord");
@@ -12,14 +19,14 @@ describe("test page", function() {
     });
 
     it("tests words in sequence", function() {
-        testPage.start(["lamp", "glass"]);
+        testPage.start(settingsWithWords(["lamp", "glass"]));
         expect(view.inputWord.calls.length).toEqual(1);
         testPage.test("lamp");
         expect(view.inputWord.calls.length).toEqual(2);
     });
 
     it("tells if wrong guess", function() {
-        testPage.start(["lamp", "glass"]);
+        testPage.start(settingsWithWords(["lamp", "glass"]));
         expect(view.inputWord.calls.length).toEqual(1);
         testPage.test("hat");
         expect(view.inputWord.calls.length).toEqual(2);
@@ -27,10 +34,11 @@ describe("test page", function() {
     });
 
     it("notifies result page", function() {
-        testPage.start(["lamp", "glass"]);
+        var settings = settingsWithWords(["lamp", "glass"]);
+        testPage.start(settings);
         testPage.test("hat");
         testPage.test("glass");
-        expect(resultPage.start).toHaveBeenCalledWith(1);
+        expect(resultPage.start).toHaveBeenCalledWith(settings, 1);
     });
 
 });

@@ -48,17 +48,18 @@ describe("slideshow page", function() {
     });
 
     it("leaves control to test page when last word shown", function() {
-        slideshowPage.start({
+        var settings = {
             words: ["monkey", "fan", "flower"],
             secondsPerWord: 6
-        });
+        };
+        slideshowPage.start(settings);
         jasmine.Clock.tick(2 * 6000);
         expect(view.displayWord).toHaveBeenCalledWith("monkey");
         expect(view.displayWord).toHaveBeenCalledWith("fan");
         expect(view.displayWord).toHaveBeenCalledWith("flower");
         expect(testPage.start).not.toHaveBeenCalled();
         jasmine.Clock.tick(6000);
-        expect(testPage.start).toHaveBeenCalledWith(["monkey", "fan", "flower"]);
+        expect(testPage.start).toHaveBeenCalledWith(settings);
     });
 
 });

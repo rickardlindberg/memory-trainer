@@ -47,7 +47,7 @@ function SlideshowPage(view, testPage) {
 
     self.displayNextWord = function(words) {
         if (words.length == 0) {
-            testPage.start(self.settings.words);
+            testPage.start(self.settings);
         } else {
             view.displayWord(words[0]);
             setTimeout(function() {
@@ -65,26 +65,26 @@ function TestPage(view, resultPage) {
 
     var self = this;
 
-    self.start = function(words) {
-        self.words = words;
+    self.start = function(settings) {
+        self.settings = settings
         self.currentWord = -1;
         self.correctGuesses = 0;
         self.askForNext();
     };
 
     self.test = function(word) {
-        if (self.words[self.currentWord] == word) {
+        if (self.settings.words[self.currentWord] == word) {
             self.correctGuesses++;
         } else {
-            view.wrongGuess(word, self.words[self.currentWord]);
+            view.wrongGuess(word, self.settings.words[self.currentWord]);
         }
         self.askForNext();
     };
 
     self.askForNext = function() {
         self.currentWord++;
-        if (self.currentWord == self.words.length) {
-            resultPage.start(self.correctGuesses);
+        if (self.currentWord == self.settings.words.length) {
+            resultPage.start(self.settings, self.correctGuesses);
         } else {
             view.inputWord();
         }
@@ -94,8 +94,9 @@ function TestPage(view, resultPage) {
 
 function ResultPage(view) {
 
-    this.start = function(correctGuesses) {
-        view.displayResult(correctGuesses);
+    this.start = function(settings, correctGuesses) {
+        var result = (correctGuesses/settings.words.length*100) + "% correct (" + correctGuesses + "/" + settings.words.length + ") at " + settings.secondsPerWord + " s/word.";
+        view.displayResult(result);
     }
 
 };
