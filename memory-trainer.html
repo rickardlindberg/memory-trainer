@@ -34,7 +34,7 @@
     $(document).ready(function() {
         var view = new View();
 
-        var resultPage = new ResultPage();
+        var resultPage = new ResultPage(view);
         var testPage = new TestPage(view, resultPage);
         var slideshowPage = new SlideshowPage(view, testPage);
         var settingsPage = new SettingsPage(slideshowPage);

@@ -92,10 +92,10 @@ function TestPage(view, resultPage) {
 
 };
 
-function ResultPage() {
+function ResultPage(view) {
 
     this.start = function(correctGuesses) {
-        alert(correctGuesses);
+        view.displayResult(correctGuesses);
     }
 
 };
@@ -117,6 +117,10 @@ function View() {
 
     this.wrongGuess = function(wrongGuess, rightAnswer) {
         alert("You guessed '" + wrongGuess + "' but was '" + rightAnswer + "'.");
+    };
+
+    this.displayResult = function(result) {
+        alert(result);
     };
 
 }
