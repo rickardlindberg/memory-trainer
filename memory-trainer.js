@@ -103,7 +103,14 @@ function ResultPage(view) {
 
 function View() {
 
+    var hideAll = function() {
+        $("#slideshow").hide();
+        $("#result").hide();
+    };
+
     this.displayWord = function(word) {
+        hideAll();
+        $("#slideshow").show();
         $("#slideshow .word").html("<b>" + word + "</b>");
         $("#slideshow .word").fadeIn(0);
     };
@@ -121,7 +128,9 @@ function View() {
     };
 
     this.displayResult = function(result) {
-        alert(result);
+        hideAll();
+        $("#result .resultText").html(result);
+        $("#result").show();
     };
 
 }
