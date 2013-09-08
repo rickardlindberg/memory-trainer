@@ -32,15 +32,14 @@
     </style>
     <script type="text/javascript">
     $(document).ready(function() {
-        var slideshowView = new SlideshowView();
-        var testPageView = new TestPageView();
+        var view = new View();
 
         var resultPage = new ResultPage();
-        var testPage = new TestPage(testPageView, resultPage);
-        var slideshowPage = new SlideshowPage(slideshowView, testPage);
+        var testPage = new TestPage(view, resultPage);
+        var slideshowPage = new SlideshowPage(view, testPage);
         var settingsPage = new SettingsPage(slideshowPage);
 
-        testPageView.testPage = testPage;
+        view.testPage = testPage;
 
         settingsPage.start();
     });

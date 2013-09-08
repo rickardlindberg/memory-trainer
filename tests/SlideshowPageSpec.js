@@ -1,14 +1,14 @@
 describe("slideshow page", function() {
 
-    var slideshowView, slideshowPage, testPage;
+    var view, slideshowPage, testPage;
 
     beforeEach(function() {
-        slideshowView = new SlideshowView();
-        spyOn(slideshowView, "displayWord");
-        spyOn(slideshowView, "fadeOutWord");
+        view = new View();
+        spyOn(view, "displayWord");
+        spyOn(view, "fadeOutWord");
         testPage = new TestPage();
         spyOn(testPage, "start");
-        slideshowPage = new SlideshowPage(slideshowView, testPage);
+        slideshowPage = new SlideshowPage(view, testPage);
         jasmine.Clock.useMock();
         jasmine.Clock.reset();
     });
@@ -18,7 +18,7 @@ describe("slideshow page", function() {
             words: ["monkey", "fan", "flower"],
             secondsPerWord: 6
         });
-        expect(slideshowView.displayWord).toHaveBeenCalledWith("monkey");
+        expect(view.displayWord).toHaveBeenCalledWith("monkey");
     });
 
     describe("switching to the next word", function() {
@@ -29,9 +29,9 @@ describe("slideshow page", function() {
                 secondsPerWord: 6
             });
             jasmine.Clock.tick(5999);
-            expect(slideshowView.displayWord).not.toHaveBeenCalledWith("fan");
+            expect(view.displayWord).not.toHaveBeenCalledWith("fan");
             jasmine.Clock.tick(1);
-            expect(slideshowView.displayWord).toHaveBeenCalledWith("fan");
+            expect(view.displayWord).toHaveBeenCalledWith("fan");
         });
 
         it("switches fades out after half the time", function() {
@@ -40,9 +40,9 @@ describe("slideshow page", function() {
                 secondsPerWord: 6
             });
             jasmine.Clock.tick(2999);
-            expect(slideshowView.fadeOutWord).not.toHaveBeenCalled();
+            expect(view.fadeOutWord).not.toHaveBeenCalled();
             jasmine.Clock.tick(1);
-            expect(slideshowView.fadeOutWord).toHaveBeenCalledWith(3000);
+            expect(view.fadeOutWord).toHaveBeenCalledWith(3000);
         });
 
     });
@@ -53,9 +53,9 @@ describe("slideshow page", function() {
             secondsPerWord: 6
         });
         jasmine.Clock.tick(2 * 6000);
-        expect(slideshowView.displayWord).toHaveBeenCalledWith("monkey");
-        expect(slideshowView.displayWord).toHaveBeenCalledWith("fan");
-        expect(slideshowView.displayWord).toHaveBeenCalledWith("flower");
+        expect(view.displayWord).toHaveBeenCalledWith("monkey");
+        expect(view.displayWord).toHaveBeenCalledWith("fan");
+        expect(view.displayWord).toHaveBeenCalledWith("flower");
         expect(testPage.start).not.toHaveBeenCalled();
         jasmine.Clock.tick(6000);
         expect(testPage.start).toHaveBeenCalledWith(["monkey", "fan", "flower"]);

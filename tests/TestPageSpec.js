@@ -1,29 +1,29 @@
 describe("test page", function() {
 
-    var testPageView, testPage, resultPage;
+    var view, testPage, resultPage;
 
     beforeEach(function() {
-        testPageView = new TestPageView();
-        spyOn(testPageView, "inputWord");
-        spyOn(testPageView, "wrongGuess");
+        view = new View();
+        spyOn(view, "inputWord");
+        spyOn(view, "wrongGuess");
         resultPage = new ResultPage();
         spyOn(resultPage, "start");
-        testPage = new TestPage(testPageView, resultPage);
+        testPage = new TestPage(view, resultPage);
     });
 
     it("tests words in sequence", function() {
         testPage.start(["lamp", "glass"]);
-        expect(testPageView.inputWord.calls.length).toEqual(1);
+        expect(view.inputWord.calls.length).toEqual(1);
         testPage.test("lamp");
-        expect(testPageView.inputWord.calls.length).toEqual(2);
+        expect(view.inputWord.calls.length).toEqual(2);
     });
 
     it("tells if wrong guess", function() {
         testPage.start(["lamp", "glass"]);
-        expect(testPageView.inputWord.calls.length).toEqual(1);
+        expect(view.inputWord.calls.length).toEqual(1);
         testPage.test("hat");
-        expect(testPageView.inputWord.calls.length).toEqual(2);
-        expect(testPageView.wrongGuess).toHaveBeenCalledWith("hat", "lamp");
+        expect(view.inputWord.calls.length).toEqual(2);
+        expect(view.wrongGuess).toHaveBeenCalledWith("hat", "lamp");
     });
 
     it("notifies result page", function() {

@@ -36,7 +36,7 @@ function SettingsPage(slideShowPage) {
 
 };
 
-function SlideshowPage(slideshowView, testPage) {
+function SlideshowPage(view, testPage) {
 
     var self = this;
 
@@ -49,9 +49,9 @@ function SlideshowPage(slideshowView, testPage) {
         if (words.length == 0) {
             testPage.start(self.settings.words);
         } else {
-            slideshowView.displayWord(words[0]);
+            view.displayWord(words[0]);
             setTimeout(function() {
-                slideshowView.fadeOutWord(500 * self.settings.secondsPerWord);
+                view.fadeOutWord(500 * self.settings.secondsPerWord);
             }, 500 * self.settings.secondsPerWord);
             setTimeout(function() {
                 self.displayNextWord(words.slice(1), self.settings.secondsPerWord);
@@ -61,7 +61,7 @@ function SlideshowPage(slideshowView, testPage) {
 
 }
 
-function TestPage(testPageView, resultPage) {
+function TestPage(view, resultPage) {
 
     var self = this;
 
@@ -76,7 +76,7 @@ function TestPage(testPageView, resultPage) {
         if (self.words[self.currentWord] == word) {
             self.correctGuesses++;
         } else {
-            testPageView.wrongGuess(word, self.words[self.currentWord]);
+            view.wrongGuess(word, self.words[self.currentWord]);
         }
         self.askForNext();
     };
@@ -86,7 +86,7 @@ function TestPage(testPageView, resultPage) {
         if (self.currentWord == self.words.length) {
             resultPage.start(self.correctGuesses);
         } else {
-            testPageView.inputWord();
+            view.inputWord();
         }
     };
 
@@ -100,7 +100,7 @@ function ResultPage() {
 
 };
 
-function SlideshowView() {
+function View() {
 
     this.displayWord = function(word) {
         $("#slideshow .word").html("<b>" + word + "</b>");
@@ -110,10 +110,6 @@ function SlideshowView() {
     this.fadeOutWord = function(inMs) {
         $("#slideshow .word").fadeOut(inMs);
     };
-
-}
-
-function TestPageView() {
 
     this.inputWord = function() {
         this.testPage.test(prompt("Next word:", ""));
