@@ -1,35 +1,41 @@
 function SettingsPage(slideShowPage) {
 
     var dictionary = [
-        "korv",
-        "blomma",
-        "kanin",
         "ägg",
-        "nyckel",
         "båt",
-        "sten",
-        "kotte",
-        "kylskåp",
-        "nalle",
-        "hjärta",
+        "blomma",
         "fönster",
-        "kakelplatta",
-        "handfat",
+        "fot",
         "fotboll",
-        "golfklubba",
-        "vas",
         "glas",
         "glass",
-        "träd",
-        "löv",
-        "ljusstake",
         "glödlampa",
+        "golfklubba",
+        "gris",
+        "gunga",
+        "handfat",
+        "hjärta",
+        "kakelplatta",
+        "kanin",
+        "kontakt",
+        "korv",
+        "kotte",
+        "kylskåp",
+        "ljusstake",
+        "löv",
+        "nalle",
+        "nyckel",
+        "öra",
+        "paket",
+        "sten",
         "tändsticka",
+        "träd",
+        "vas",
     ];
 
     this.start = function() {
         slideShowPage.start({
-            words: _.sample(dictionary, 20),
+            words: _.sample(dictionary, 25),
             secondsPerWord: 6
         });
     };
