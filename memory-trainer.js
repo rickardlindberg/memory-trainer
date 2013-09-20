@@ -36,7 +36,7 @@ function SettingsPage(slideShowPage) {
     this.start = function() {
         slideShowPage.start({
             words: _.sample(dictionary, 25),
-            secondsPerWord: 6
+            secondsPerWord: 5
         });
     };
 
