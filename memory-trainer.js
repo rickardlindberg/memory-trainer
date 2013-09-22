@@ -2,7 +2,6 @@ function SettingsPage(slideShowPage) {
 
     var dictionary = [
         "ägg",
-        "båt",
         "blomma",
         "fönster",
         "fot",
@@ -24,18 +23,37 @@ function SettingsPage(slideShowPage) {
         "ljusstake",
         "löv",
         "nalle",
-        "nyckel",
         "öra",
         "paket",
         "sten",
         "tändsticka",
         "träd",
         "vas",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
     ];
 
     this.start = function() {
         slideShowPage.start({
-            words: _.sample(dictionary, 25),
+            words: _.sample(dictionary, 30),
             secondsPerWord: 5
         });
     };
